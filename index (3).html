@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>قەزوان | مێنیو · Qazwan Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+ --ink:#0B0E0B; --forest:#0F2C20; --green:#16431f; --gold:#C8A951; --gold-soft:#D9C079;
+ --cream:#ECE6D6; --cream-dim:#cfc8b6; --muted:#948C79;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:'Vazirmatn',system-ui,sans-serif;color:var(--cream);line-height:1.5;
+ background:radial-gradient(130% 70% at 50% -5%, #16241b 0%, #0E120E 50%, #0B0E0B 100%);
+ background-attachment:fixed;min-height:100vh}
+/* language toggle visibility */
+.t-en{display:none}
+body.en .t-en{display:inline}
+body.en .t-ku{display:none}
+/* hero */
+.hero{position:relative;padding:24px 16px 6px;text-align:center}
+.lang{position:absolute;top:15px;right:14px;display:inline-flex;align-items:center;gap:6px;
+ background:rgba(255,255,255,.06);border:1px solid rgba(200,169,81,.4);color:var(--gold-soft);
+ padding:7px 13px;border-radius:30px;font-family:'Vazirmatn',sans-serif;font-size:13px;cursor:pointer;
+ transition:border-color .18s}
+.lang:hover{border-color:var(--gold)}
+.lang svg{width:15px;height:15px}
+.brand-row{display:flex;align-items:center;justify-content:center;gap:12px}
+.badge{width:56px;height:56px;border-radius:50%;flex:0 0 auto;position:relative;
+ background:radial-gradient(circle at 50% 38%,#fff 0%,#f4f1ea 80%,#ece8df 100%);
+ display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px -6px rgba(0,0,0,.6)}
+.badge::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:1.5px solid rgba(200,169,81,.55)}
+.badge .mk{width:60%;height:auto;display:block}
+.brand-row h1{font-family:'Reem Kufi',serif;font-weight:600;font-size:30px;color:var(--cream);line-height:1}
+.brand-row .sub{font-size:11.5px;color:var(--gold-soft);letter-spacing:.5px;margin-top:3px}
+/* sticky category bar */
+.catbar{position:sticky;top:0;z-index:30;background:rgba(11,14,11,.86);backdrop-filter:blur(10px);
+ -webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,169,81,.2);margin-top:12px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:11px 16px;max-width:900px;margin:0 auto}
+.pill{flex:0 0 auto;white-space:nowrap;border:1px solid rgba(200,169,81,.4);background:transparent;
+ color:var(--cream);padding:8px 16px;border-radius:30px;font-family:'Vazirmatn',sans-serif;font-size:14px;
+ cursor:pointer;transition:background .18s,color .18s,border-color .18s}
+.pill:hover{border-color:var(--gold-soft)}
+.pill.active{background:var(--gold);color:#10261b;border-color:var(--gold);font-weight:600}
+/* content */
+main{max-width:760px;margin:0 auto;padding:10px 16px 48px}
+.cat{margin-top:24px}
+.cat-head{display:flex;align-items:center;gap:11px;padding-bottom:11px;
+ border-bottom:1px solid rgba(200,169,81,.22);margin-bottom:4px}
+.cat-head .ico{width:24px;height:24px;color:var(--gold);flex:0 0 auto;display:flex}
+.cat-head .ico svg{width:100%;height:100%}
+.cat-head h2{font-family:'Reem Kufi',serif;font-weight:600;font-size:20px;color:var(--cream);flex:1}
+.cat-head .count{font-size:12px;color:#10261b;background:var(--gold);border-radius:20px;
+ padding:2px 10px;font-weight:600;font-variant-numeric:tabular-nums}
+.items{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:640px){.items{grid-template-columns:1fr 1fr;column-gap:30px}}
+.item{display:flex;align-items:baseline;gap:8px;padding:9px 4px;border-radius:8px;transition:background .15s}
+.item .name{color:var(--cream);font-size:15px;flex:0 1 auto}
+.item .dots{flex:1;min-width:14px;align-self:center;border-bottom:1px dotted rgba(200,169,81,.38)}
+.item .price{color:var(--gold);font-weight:600;font-size:14.5px;font-variant-numeric:tabular-nums;
+ letter-spacing:.5px;direction:ltr;white-space:nowrap}
+.item:hover,.item:active{background:rgba(200,169,81,.07)}
+/* featured today's special */
+.special{position:relative;overflow:hidden;border-radius:16px;margin:6px 0 2px;
+ background:linear-gradient(135deg,rgba(26,77,46,.6),rgba(15,44,32,.5));
+ border:1.5px solid rgba(200,169,81,.55);padding:17px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:16px;
+ box-shadow:0 10px 30px -14px rgba(0,0,0,.7)}
+.special::before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(130% 140% at 100% 0%,rgba(200,169,81,.20),transparent 55%)}
+.special .info{position:relative;min-width:0}
+.special .chip{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;
+ letter-spacing:.4px;color:#10261b;background:var(--gold);border-radius:20px;padding:3px 11px;margin-bottom:9px}
+.special .chip svg{width:12px;height:12px}
+.special .t{font-family:'Reem Kufi',serif;font-size:22px;color:var(--gold-soft);font-weight:600;line-height:1.1}
+.special .s{font-size:13px;color:var(--cream-dim);margin-top:4px}
+.special .ask{font-size:12px;color:var(--muted);margin-top:7px}
+.special .pr{position:relative;flex:0 0 auto;color:#10261b;background:var(--gold);font-weight:700;
+ border-radius:30px;padding:9px 18px;font-size:15px;font-variant-numeric:tabular-nums;direction:ltr}
+/* footer */
+footer{text-align:center;padding:26px 16px 40px;border-top:1px solid rgba(200,169,81,.2)}
+.ig{display:inline-flex;align-items:center;gap:8px;color:var(--gold-soft);font-size:13.5px;
+ letter-spacing:1.5px;direction:ltr;font-weight:600}
+.ig svg{width:18px;height:18px}
+.credit{color:var(--muted);font-size:11px;letter-spacing:1.4px;margin-top:8px;direction:ltr;opacity:.75}
+.anim{animation:fadeUp .28s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <button class="lang" id="langBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.4 3.9 5.6 3.9 9s-1.4 6.6-3.9 9c-2.5-2.4-3.9-5.6-3.9-9s1.4-6.6 3.9-9Z"/></svg><span class="t-ku">English</span><span class="t-en">کوردی</span></button>
+  <div class="brand-row">
+    <div class="badge"><svg class="mk" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333.000000 369.000000" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Qazwan">
+<g transform="translate(0.000000,369.000000) scale(0.100000,-0.100000)"
+fill="#16431f" stroke="none">
+<path d="M2015 3542 c-16 -11 -39 -29 -49 -41 -11 -11 -29 -21 -41 -21 -13 0
+-39 -19 -67 -50 -25 -27 -52 -50 -60 -50 -7 0 -38 -25 -68 -55 -30 -30 -62
+-55 -70 -55 -9 0 -48 -28 -88 -62 -93 -82 -177 -148 -188 -148 -5 0 -38 -27
+-73 -60 -36 -33 -70 -60 -76 -60 -6 0 -31 -21 -55 -46 -25 -25 -61 -55 -80
+-67 -19 -11 -69 -52 -111 -89 -42 -37 -81 -68 -87 -68 -20 0 -362 -349 -362
+-369 0 -11 -17 -37 -37 -58 -48 -49 -103 -128 -103 -148 0 -9 -16 -32 -35 -52
+-20 -21 -45 -64 -61 -107 -15 -39 -33 -78 -40 -87 -8 -8 -14 -22 -14 -31 0 -8
+-9 -27 -20 -41 -11 -14 -20 -31 -20 -39 0 -8 -7 -23 -15 -34 -8 -10 -15 -37
+-15 -59 0 -22 -7 -62 -16 -90 -24 -74 -24 -466 0 -512 9 -18 16 -45 16 -61 0
+-15 7 -37 15 -48 8 -10 15 -33 15 -50 0 -17 7 -37 15 -44 8 -7 15 -18 15 -24
+0 -7 11 -23 25 -36 14 -13 39 -53 56 -89 17 -36 46 -82 64 -101 18 -19 36 -45
+39 -57 4 -11 27 -40 51 -62 45 -41 45 -41 127 -41 128 0 134 24 34 118 -25 24
+-46 48 -46 54 0 5 -18 32 -40 58 -22 26 -40 52 -40 57 0 5 -14 22 -31 39 -32
+30 -59 83 -59 114 0 10 -7 23 -15 30 -8 7 -15 25 -15 40 0 15 -6 33 -14 39 -8
+7 -18 27 -22 44 -3 18 -11 38 -18 46 -8 11 -21 129 -25 236 -2 61 21 241 33
+260 9 14 16 41 16 61 0 36 32 118 51 130 5 3 9 16 9 30 0 13 13 50 30 81 16
+31 30 61 30 68 0 6 14 24 30 40 17 16 30 33 30 38 0 6 11 25 25 43 14 18 25
+37 25 43 0 6 36 47 80 90 44 43 80 85 80 93 0 27 340 339 395 363 17 7 59 43
+95 79 35 36 71 66 80 66 9 0 42 27 75 60 33 33 64 60 70 60 6 0 35 25 65 56
+30 30 70 62 88 70 19 7 64 43 101 79 37 36 72 65 77 65 5 0 32 23 59 50 27 28
+56 50 65 50 28 1 230 205 230 232 -1 43 -85 62 -135 30z"/>
+<path d="M954 3300 c-77 -31 -70 -200 7 -200 19 0 69 55 93 102 31 62 -33 125
+-100 98z"/>
+<path d="M1035 2148 c-26 -15 -52 -46 -70 -83 -20 -40 -38 -70 -52 -86 -6 -8
+-13 -34 -16 -59 -11 -88 -19 -119 -33 -131 -8 -6 -14 -22 -14 -34 0 -12 -9
+-34 -20 -48 -11 -14 -20 -39 -20 -55 0 -17 -4 -34 -10 -37 -5 -3 -10 -21 -10
+-39 0 -19 -7 -39 -15 -46 -7 -6 -17 -33 -20 -58 -3 -26 -10 -55 -16 -65 -5
+-10 -13 -47 -16 -83 -3 -35 -12 -69 -19 -75 -8 -6 -14 -17 -14 -24 0 -6 -25
+-35 -55 -64 -30 -29 -55 -58 -55 -64 1 -29 21 -42 77 -47 54 -5 59 -7 75 -39
+9 -18 26 -40 38 -48 16 -11 20 -22 16 -39 -9 -34 72 -71 116 -53 15 6 34 9 42
+6 8 -3 22 1 33 8 10 8 34 15 54 15 20 0 42 7 49 15 7 8 20 15 29 15 9 0 42 25
+74 55 31 30 61 55 66 55 16 0 120 109 141 148 11 20 32 55 45 77 13 22 27 47
+30 55 4 8 12 26 18 39 7 15 12 72 11 145 -1 121 -1 121 -37 161 -48 52 -117
+55 -188 7 -39 -27 -99 -100 -99 -122 0 -4 -7 -14 -16 -21 -34 -28 -13 -161 35
+-231 45 -65 49 -79 26 -98 -8 -7 -15 -21 -15 -31 0 -11 -11 -24 -25 -31 -14
+-6 -25 -15 -25 -19 0 -21 -55 -69 -85 -75 -18 -3 -46 -19 -61 -35 -15 -16 -35
+-29 -43 -29 -9 0 -24 -7 -34 -14 -9 -7 -27 -11 -40 -9 -14 3 -29 -2 -36 -11
+-8 -9 -22 -16 -32 -16 -26 0 -25 35 1 58 18 14 20 24 14 73 -6 57 8 89 41 89
+15 0 85 75 85 91 0 6 11 25 25 43 15 19 25 46 25 65 0 34 23 77 52 99 10 7 18
+26 18 41 0 16 7 34 15 41 10 8 15 30 15 64 0 29 4 56 9 62 14 13 19 470 6 483
+-17 17 -68 22 -90 9z m-15 -412 c0 -58 -4 -87 -14 -95 -9 -8 -12 -26 -8 -61 4
+-40 1 -51 -12 -56 -9 -3 -16 -12 -16 -20 0 -8 -9 -22 -20 -31 -11 -10 -20 -25
+-20 -33 0 -9 -13 -29 -29 -45 -17 -15 -31 -37 -33 -49 -7 -48 -23 -10 -23 54
+0 39 -3 70 -7 70 -21 0 -4 37 25 55 28 18 32 27 42 92 8 50 18 80 33 96 12 13
+22 34 22 47 0 26 38 73 51 64 5 -3 9 -43 9 -88z"/>
+<path d="M2825 1890 c-3 -5 -20 -10 -37 -10 -48 0 -114 -37 -139 -77 -22 -36
+-22 -36 5 -60 15 -12 34 -23 42 -23 14 0 22 3 82 33 19 9 42 17 53 17 11 0 30
+6 42 14 12 7 55 16 94 19 41 3 83 13 95 21 12 9 35 16 49 16 48 0 88 29 42 30
+-10 0 -27 7 -37 15 -24 18 -281 22 -291 5z"/>
+<path d="M2262 1667 c-26 -27 -32 -41 -32 -78 0 -56 13 -69 65 -69 75 0 96 56
+53 138 -28 51 -44 52 -86 9z"/>
+<path d="M1785 1673 c-93 -20 -173 -112 -188 -213 -20 -144 -20 -145 7 -188
+15 -24 34 -42 48 -44 32 -4 34 -35 5 -66 -13 -15 -27 -40 -31 -55 -5 -20 -18
+-33 -44 -45 -45 -21 -88 -49 -121 -79 -13 -13 -32 -23 -42 -23 -10 0 -21 -5
+-24 -10 -11 -19 -84 -50 -114 -50 -36 0 -72 -43 -53 -62 16 -16 131 -23 145
+-9 6 6 24 11 40 11 35 0 97 45 97 71 0 14 10 20 50 25 28 4 53 11 56 15 3 5
+15 9 28 9 43 0 188 169 218 254 10 27 23 56 31 65 55 68 66 222 21 307 -40 76
+-74 99 -129 87z"/>
+<path d="M2760 1458 c-75 -51 -115 -144 -107 -250 9 -107 20 -120 119 -127 87
+-7 97 -24 48 -81 -42 -48 -233 -52 -395 -7 -131 36 -176 36 -210 0 -14 -15
+-25 -30 -25 -33 0 -4 -18 -14 -39 -23 -21 -10 -41 -25 -44 -35 -3 -9 -14 -39
+-24 -67 -10 -27 -18 -68 -16 -90 7 -135 30 -175 98 -175 60 0 74 20 81 116 9
+109 81 190 124 139 7 -8 23 -15 36 -15 12 0 26 -4 29 -10 3 -5 19 -10 35 -10
+16 0 41 -5 57 -11 18 -7 67 -8 139 -4 111 7 111 7 185 72 86 75 115 128 133
+243 7 42 16 81 19 87 10 16 -13 196 -27 218 -66 101 -133 120 -216 63z m118
+-203 c-2 -16 -10 -20 -43 -20 -49 0 -58 24 -24 61 23 24 23 24 46 2 13 -13 23
+-31 21 -43z"/>
+<path d="M2168 1313 c-31 -5 -99 -76 -129 -135 -23 -44 -78 -91 -116 -98 -17
+-3 -29 -13 -32 -25 -6 -32 -52 -85 -80 -91 -31 -8 -87 -58 -107 -96 -15 -29
+-93 -88 -116 -88 -8 0 -38 -25 -68 -55 -30 -30 -69 -60 -87 -66 -22 -7 -35
+-19 -39 -35 -11 -44 38 -73 66 -39 7 8 19 15 28 15 14 0 79 26 124 51 10 5 24
+9 33 9 8 0 29 13 47 28 18 15 44 35 58 44 14 8 57 45 96 82 40 36 76 66 80 66
+5 1 29 32 54 71 29 45 57 77 80 89 43 22 195 178 205 211 8 23 -35 71 -60 67
+-5 0 -22 -3 -37 -5z"/>
+<path d="M922 148 c6 -16 89 -31 101 -19 18 18 -5 31 -54 31 -36 0 -49 -4 -47
+-12z"/>
+</g>
+</svg></div>
+    <div><h1><span class="t-ku">قەزوان</span><span class="t-en">Qazwan</span></h1><div class="sub"><span class="t-ku">قاوەخانە و شیرینی</span><span class="t-en">Coffee &amp; Sweets</span></div></div>
+  </div>
+</header>
+<div class="catbar"><nav class="pills"><button class="pill active" data-cat="all"><span class="t-ku">هەمووی</span><span class="t-en">All</span></button>
+<button class="pill" data-cat="hot"><span class="t-ku">خواردنەوەی گەرم</span><span class="t-en">Hot Drinks</span></button>
+<button class="pill" data-cat="cold"><span class="t-ku">خواردنەوەی سارد</span><span class="t-en">Cold Drinks</span></button>
+<button class="pill" data-cat="milkshake"><span class="t-ku">میلک شەیک</span><span class="t-en">Milkshakes</span></button>
+<button class="pill" data-cat="sweets"><span class="t-ku">شیرینی</span><span class="t-en">Sweets</span></button>
+<button class="pill" data-cat="kilo"><span class="t-ku">قاوە بە کیلۆ</span><span class="t-en">Coffee by Kilo</span></button></nav></div>
+<main id="menu">
+  <div class="special" id="special">
+    <div class="info">
+      <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.6 6.3L21 9l-4.9 4.2L17.7 20 12 16.6 6.3 20l1.6-6.8L3 9l6.4-.7L12 2z"/></svg><span class="t-ku"> تایبەتی ئەمڕۆ</span><span class="t-en"> Today's Special</span></span>
+      <div class="t"><span class="t-ku">تامی ئەمڕۆ</span><span class="t-en">Today's Flavor</span></div>
+      <div class="s"><span class="t-ku">سموزی • میڵک شەیک</span><span class="t-en">Smoothie • Milkshake</span></div>
+      <div class="ask"><span class="t-ku">پرسیارمان لێ بکە — تامەکان هەموو ڕۆژێ دەگۆڕێن</span><span class="t-en">Ask us — flavors change every day</span></div>
+    </div>
+    <div class="pr">3,000</div>
+  </div>
+<section class="cat" data-cat="hot">
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V9Z"/><path d="M17 10h2.2a2.3 2.3 0 0 1 0 4.6H17"/><path d="M7 5.2c.5-.7.2-1.3 0-2M10.5 5.2c.5-.7.2-1.3 0-2M14 5.2c.5-.7.2-1.3 0-2"/></svg></span><h2><span class="t-ku">خواردنەوەی گەرم</span><span class="t-en">Hot Drinks</span></h2><span class="count">41</span></div>
+  <div class="items"><div class="item"><span class="name"><span class="t-ku">قاوەی تایبەت بە قەزوان</span><span class="t-en">Special Qazwan Coffee</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">ریسترێتۆ</span><span class="t-en">Ristreto</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئیسپرێسۆ</span><span class="t-en">Espresso</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">لۆنگۆ</span><span class="t-en">Lungo</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">دەبڵ ئیسپرێسۆ</span><span class="t-en">Espresso Dopio</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئەمریکانۆ</span><span class="t-en">Americano</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئەمریکانۆ بە شیر</span><span class="t-en">Americano with Milk</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">لۆنگ بلاک</span><span class="t-en">Long Black</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">کۆرتادۆ</span><span class="t-en">Cortado</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کاپوچینۆ</span><span class="t-en">Capuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کلاسیک کاپوچینۆ</span><span class="t-en">Classic Capuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کافی لاتێ</span><span class="t-en">Cafe Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کارامێل لاتێ</span><span class="t-en">Caramel Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">سپانیش لاتێ</span><span class="t-en">Spanish Latte</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">پیکۆلۆ لاتێ</span><span class="t-en">Picollo Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">لاتێ ماکیاتۆ</span><span class="t-en">Latte Machiato</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئیسپرێسۆ کۆنهیلیۆ</span><span class="t-en">Espresso Conheilo</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کافی کۆنپانا</span><span class="t-en">Cafe Conpanna</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئەفۆگاتۆ</span><span class="t-en">Afogato</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">ماکیاتۆ</span><span class="t-en">Machiato</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">فلات وایت</span><span class="t-en">Flat White</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مۆکا</span><span class="t-en">Mocha</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">وایت مۆکا</span><span class="t-en">White Mocha</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">زێبرا مۆکا</span><span class="t-en">Zebra Mocha</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی قەزوان</span><span class="t-en">Kurdish Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی تاڵ</span><span class="t-en">Bitter Kurdish Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی عەرەبی</span><span class="t-en">Arabic Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی تورکی</span><span class="t-en">Turkish Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی فستق</span><span class="t-en">Pistachio Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی چکلێتی</span><span class="t-en">Chocolate Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی نۆتێلا</span><span class="t-en">Nutella Coffee</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">هۆت چۆکلێت</span><span class="t-en">Hot Chocolate</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">دارک چۆکلێت</span><span class="t-en">Dark Chocolate</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">وایت چۆکلێت</span><span class="t-en">White Chocolate</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">نێسکافە</span><span class="t-en">Nescafe</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کاکاو</span><span class="t-en">Kakau</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کاپوچینۆ</span><span class="t-en">Capuccino</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شیر</span><span class="t-en">Milk</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شیر بە نەعنا</span><span class="t-en">Mint Milk</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شیر کەرەمێل</span><span class="t-en">Caramel Milk</span></span><span class="dots"></span><span class="price">1,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">محلەبی گەرم</span><span class="t-en">Hot Muhalabi</span></span><span class="dots"></span><span class="price">1,500</span></div></div>
+</section>
+<section class="cat" data-cat="cold">
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.2 14.2a1.6 1.6 0 0 1-1.6 1.5H9.8a1.6 1.6 0 0 1-1.6-1.5L7 4Z"/><path d="M7.4 8.5h9.2"/><path d="M11 11.5l2 2M13 11.5l-2 2"/></svg></span><h2><span class="t-ku">خواردنەوەی سارد</span><span class="t-en">Cold Drinks</span></h2><span class="count">39</span></div>
+  <div class="items"><div class="item"><span class="name"><span class="t-ku">فراپێی یۆنانی</span><span class="t-en">Greece Frappe</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس ئەمریکانۆ</span><span class="t-en">Ice Americano</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس لۆنگ بلاک</span><span class="t-en">Ice Long Black</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس لاتێ</span><span class="t-en">Ice Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس سپانیش لاتێ</span><span class="t-en">Ice Spanish Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس کاپوچینۆ</span><span class="t-en">Ice Cappuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس ماکیاتۆ</span><span class="t-en">Ice Machiatto</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس مۆکاچینۆ</span><span class="t-en">Ice Mokaccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس ڤانیلا لاتێ</span><span class="t-en">Ice Vanilla Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس کارامێل لاتێ</span><span class="t-en">Ice Caramel Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کارامێل کاپوچینۆ</span><span class="t-en">Caramel Cappuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ڤانیلا کاپوچینۆ</span><span class="t-en">Vanilla Cappuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کارامێل ماکیاتۆ</span><span class="t-en">Caramel Machiatto</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ڤانیلا ماکیاتۆ</span><span class="t-en">Vanilla Machiatto</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ئایس فلات لاتێ</span><span class="t-en">Ice Flat Latte</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">فرێدۆ ئیسپرێسۆ</span><span class="t-en">Freddo Espresso</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">فرێدۆ کاپوچینۆ</span><span class="t-en">Freddo Cappuccino</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">گالاو</span><span class="t-en">Galeo</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">فراپێی ئیتالی</span><span class="t-en">Italian Frappe</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">ڤینیۆس</span><span class="t-en">Viennois</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەیکەراتۆ</span><span class="t-en">Shakerato</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مەکسیکی</span><span class="t-en">Maxiki</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">سپێشڵ مەکسیکی</span><span class="t-en">Special Maxiki</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەربەتی پرتەقاڵ</span><span class="t-en">Orange Juice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەربەتی لیمۆ</span><span class="t-en">Lemon Juice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شیرمۆز</span><span class="t-en">Banana Milk</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەربەتی هەنار</span><span class="t-en">Pomegranate Juice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەربەتی سێو</span><span class="t-en">Apple Juice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">شەربەتی گزەر</span><span class="t-en">Carrot Juice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مۆهیتۆ</span><span class="t-en">Mojito</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مۆهیتۆی هەنار</span><span class="t-en">Pomegranate Mojito</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مۆهیتۆی شلک</span><span class="t-en">Strawberry Mojito</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">بلو لاگۆن</span><span class="t-en">Blue Lagon</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">رێد لاگۆن</span><span class="t-en">Red Lagon</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">بلو هاوای</span><span class="t-en">Blue Hawaii</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">رێد هاوای</span><span class="t-en">Red Hawaii</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">میامی ڤایس</span><span class="t-en">Miami Vice</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">پاینا کۆلادا</span><span class="t-en">Pina Colada</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مارگریتا</span><span class="t-en">Margrita</span></span><span class="dots"></span><span class="price">2,500</span></div></div>
+</section>
+<section class="cat" data-cat="milkshake">
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.2 14.2a1.6 1.6 0 0 1-1.6 1.5H9.8a1.6 1.6 0 0 1-1.6-1.5L7 4Z"/><path d="M7.4 8.5h9.2"/><path d="M11 11.5l2 2M13 11.5l-2 2"/></svg></span><h2><span class="t-ku">میلک شەیک</span><span class="t-en">Milkshakes</span></h2><span class="count">11</span></div>
+  <div class="items"><div class="item"><span class="name"><span class="t-ku">میلکشەیکی ڤانیلا</span><span class="t-en">Vanilla Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی چۆکلێت</span><span class="t-en">Chocolate Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی کارامێل</span><span class="t-en">Caramel Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی ئۆریۆ</span><span class="t-en">Oreo Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی لۆتۆس</span><span class="t-en">Lotus Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی کاپوچینۆ</span><span class="t-en">Capuccino Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی نیسکوێک</span><span class="t-en">Nesquik Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی شلک</span><span class="t-en">Strawberry Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">میلکشەیکی فستق</span><span class="t-en">Pistachio Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">شیری شلک</span><span class="t-en">Strawberry Milk</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">سموزی (تامی ئەمڕۆ)</span><span class="t-en">Smoothie (Today's Flavor)</span></span><span class="dots"></span><span class="price">3,000</span></div></div>
+</section>
+<section class="cat" data-cat="sweets">
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l3.5-9.5a3.7 3.7 0 0 1 7 0L19 19"/><path d="M5 19h14"/><path d="M12 6.5V4"/><circle cx="12" cy="3" r="1"/></svg></span><h2><span class="t-ku">شیرینی</span><span class="t-en">Sweets</span></h2><span class="count">16</span></div>
+  <div class="items"><div class="item"><span class="name"><span class="t-ku">کریپ سادە</span><span class="t-en">Crepe</span></span><span class="dots"></span><span class="price">2,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">کریپ مۆز</span><span class="t-en">Crepe with Banana</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کریپ ئۆریۆ</span><span class="t-en">Crepe with Oreo</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">کریپ فستق</span><span class="t-en">Crepe with Pistachio</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">کریپ کیندەر</span><span class="t-en">Crepe with Kinder</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">کریپ مشکل</span><span class="t-en">Mix Crepe</span></span><span class="dots"></span><span class="price">4,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">سپاگێتی کریپ</span><span class="t-en">Spagethi Crepe</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">مینی پان کێک</span><span class="t-en">Mini Pancake</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">مەقڵوبە فستق</span><span class="t-en">Maqluba Pistachio</span></span><span class="dots"></span><span class="price">4,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">مەقڵوبە ئۆریۆ</span><span class="t-en">Maqluba Oreo</span></span><span class="dots"></span><span class="price">4,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">مەقڵوبە لۆتۆس</span><span class="t-en">Maqluba Lotus</span></span><span class="dots"></span><span class="price">4,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">سوشی کریپ</span><span class="t-en">Sushi Crepe</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">شاورمە کریپ</span><span class="t-en">Shawrma Crepe</span></span><span class="dots"></span><span class="price">2,500</span></div>
+<div class="item"><span class="name"><span class="t-ku">پاستا کریپ</span><span class="t-en">Pasta Crepe</span></span><span class="dots"></span><span class="price">3,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">پیتزا کریپ</span><span class="t-en">Pizza Crepe</span></span><span class="dots"></span><span class="price">4,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاپی میوە</span><span class="t-en">Fruit Bowl</span></span><span class="dots"></span><span class="price">2,000</span></div></div>
+</section>
+<section class="cat" data-cat="kilo">
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 11a1.5 1.5 0 0 1-1.5 1.4H8.5A1.5 1.5 0 0 1 7 19L6 8Z"/><path d="M6 8l1.6-3.3A1.5 1.5 0 0 1 8.9 4h6.2a1.5 1.5 0 0 1 1.3.7L18 8"/><path d="M9.5 12h5"/></svg></span><h2><span class="t-ku">قاوە بە کیلۆ</span><span class="t-en">Coffee by Kilo</span></h2><span class="count">7</span></div>
+  <div class="items"><div class="item"><span class="name"><span class="t-ku">قاوەی قەزوان</span><span class="t-en">Qazwan Coffee</span></span><span class="dots"></span><span class="price">30,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی ئیسپرێسۆ</span><span class="t-en">Espresso Coffee</span></span><span class="dots"></span><span class="price">35,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی فستق</span><span class="t-en">Pistachio Coffee</span></span><span class="dots"></span><span class="price">30,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">هۆت چۆکلێت</span><span class="t-en">Hot Chocolate</span></span><span class="dots"></span><span class="price">25,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">نێسکافە</span><span class="t-en">Nescafe</span></span><span class="dots"></span><span class="price">25,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی چکلێتی</span><span class="t-en">Chocolate Coffee</span></span><span class="dots"></span><span class="price">25,000</span></div>
+<div class="item"><span class="name"><span class="t-ku">قاوەی عەرەبی</span><span class="t-en">Arabic Coffee</span></span><span class="dots"></span><span class="price">30,000</span></div></div>
+</section>
+</main>
+<footer>
+  <div class="ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none"/></svg><span>@QAZWAN.COFFE</span></div>
+  <div class="credit">Created by Redyar Nawzad</div>
+</footer>
+<script>
+const pills=[...document.querySelectorAll('.pill')];
+const cats=[...document.querySelectorAll('.cat')];
+const menu=document.getElementById('menu');
+const catbar=document.querySelector('.catbar');
+const special=document.getElementById('special');
+const langBtn=document.getElementById('langBtn');
+let active='all';
+function apply(){
+  if(special)special.style.display=(active==='all'||active==='milkshake')?'':'none';
+  cats.forEach(sec=>{sec.style.display=(active==='all'||sec.dataset.cat===active)?'':'none';});
+}
+function animate(){menu.classList.remove('anim');void menu.offsetWidth;menu.classList.add('anim');}
+pills.forEach(p=>p.addEventListener('click',()=>{
+  pills.forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');
+  active=p.dataset.cat;
+  animate();apply();
+  if(window.scrollY>menu.offsetTop)window.scrollTo({top:menu.offsetTop-catbar.offsetHeight-6,behavior:'smooth'});
+}));
+function setLang(l){
+  document.body.classList.toggle('en', l==='en');
+  document.documentElement.dir=(l==='en')?'ltr':'rtl';
+  document.documentElement.lang=(l==='en')?'en':'ckb';
+  try{localStorage.setItem('qz_lang',l);}catch(e){}
+}
+let lang='ku';
+try{lang=localStorage.getItem('qz_lang')||'ku';}catch(e){}
+setLang(lang);
+langBtn.addEventListener('click',()=>{setLang(document.body.classList.contains('en')?'ku':'en');});
+apply();
+</script>
+</body>
+</html>
