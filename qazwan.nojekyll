@@ -294,7 +294,7 @@ fill="#16431f" stroke="none">
 <div class="item"><span class="name"><span class="t-ku">مارگریتا</span><span class="t-en">Margrita</span></span><span class="dots"></span><span class="price">2,500</span></div></div>
 </section>
 <section class="cat" data-cat="milkshake">
-  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.2 14.2a1.6 1.6 0 0 1-1.6 1.5H9.8a1.6 1.6 0 0 1-1.6-1.5L7 4Z"/><path d="M7.4 8.5h9.2"/><path d="M11 11.5l2 2M13 11.5l-2 2"/></svg></span><h2><span class="t-ku">میلک شەیک</span><span class="t-en">Milkshakes</span></h2><span class="count">11</span></div>
+  <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10l-1.2 14.2a1.6 1.6 0 0 1-1.6 1.5H9.8a1.6 1.6 0 0 1-1.6-1.5L7 4Z"/><path d="M7.4 8.5h9.2"/><path d="M11 11.5l2 2M13 11.5l-2 2"/></svg></span><h2><span class="t-ku">میلک شەیک</span><span class="t-en">Milkshakes</span></h2><span class="count">10</span></div>
   <div class="items"><div class="item"><span class="name"><span class="t-ku">میلکشەیکی ڤانیلا</span><span class="t-en">Vanilla Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
 <div class="item"><span class="name"><span class="t-ku">میلکشەیکی چۆکلێت</span><span class="t-en">Chocolate Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
 <div class="item"><span class="name"><span class="t-ku">میلکشەیکی کارامێل</span><span class="t-en">Caramel Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
@@ -304,8 +304,7 @@ fill="#16431f" stroke="none">
 <div class="item"><span class="name"><span class="t-ku">میلکشەیکی نیسکوێک</span><span class="t-en">Nesquik Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
 <div class="item"><span class="name"><span class="t-ku">میلکشەیکی شلک</span><span class="t-en">Strawberry Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
 <div class="item"><span class="name"><span class="t-ku">میلکشەیکی فستق</span><span class="t-en">Pistachio Milkshake</span></span><span class="dots"></span><span class="price">3,000</span></div>
-<div class="item"><span class="name"><span class="t-ku">شیری شلک</span><span class="t-en">Strawberry Milk</span></span><span class="dots"></span><span class="price">3,000</span></div>
-<div class="item"><span class="name"><span class="t-ku">سموزی (تامی ئەمڕۆ)</span><span class="t-en">Smoothie (Today's Flavor)</span></span><span class="dots"></span><span class="price">3,000</span></div></div>
+<div class="item"><span class="name"><span class="t-ku">شیری شلک</span><span class="t-en">Strawberry Milk</span></span><span class="dots"></span><span class="price">3,000</span></div></div>
 </section>
 <section class="cat" data-cat="sweets">
   <div class="cat-head"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l3.5-9.5a3.7 3.7 0 0 1 7 0L19 19"/><path d="M5 19h14"/><path d="M12 6.5V4"/><circle cx="12" cy="3" r="1"/></svg></span><h2><span class="t-ku">شیرینی</span><span class="t-en">Sweets</span></h2><span class="count">16</span></div>
